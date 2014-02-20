@@ -1,14 +1,33 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="ja" ng-app>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Image Processor</title>
-<!-- <link href="stylesheets/style.css" rel="stylesheet" type="text/css" /> -->
+  <meta charset="UTF-8">
+  <title>imapro</title>
+  <script src="http://code.angularjs.org/angular-1.0.1.min.js"></script>
+  <script src="myscript.js"></script>
+  <style>
+    .done-true {
+      color: gray;
+      text-decoration: line-through;
+    }
+  </style>
 </head>
-
 <body>
-<h1>Welcome to Imapro!!</h1>
-<h2>ここでは画像処理ができます。</h2>
-
+  <h1>imapro</h1>
+  <div ng-controller="mainCtrl">
+  <p>Finished Task: {{getDoneCount()}} / {{tasks.length}}</p>
+  <button ng-click="deleteDone()">Delete Finished</button>
+  <ul>
+  <li ng-repeat="task in tasks">
+    <input type="checkbox" ng-model="task.done">
+    <span class="done-{{task.done}}">{{task.body}}</span>
+    <a href ng-click="tasks.splice($index, 1)">[x]</a>
+  </li>
+  </ul>
+  <form ng-submit="addNew()">
+  <input type="text" ng-model="newTaskBody">
+  <input type="submit" value="add">
+  </form>
+  </div>
 </body>
 </html>
